@@ -5,11 +5,11 @@ const add = document.getElementById('add')
 const minus = document.getElementById('minus')
 const number = document.querySelector('span')
 
+number.innerText = 0
+
 // 2. reducer를 만든다. reducer는 function(함수)이다.
 // 3. action을 만든다.
 const countModifier = (count = 0, action) => {
-  console.log(count, action)
-
   if(action.type === 'ADD') {
     return count + 1
   } else if(action.type === 'MINUS') {
@@ -22,8 +22,18 @@ const countModifier = (count = 0, action) => {
 // 1. store를 만든다.
 const countStore = createStore(countModifier)
 
-// 4. dispatch(객체)를 만든다.
-countStore.dispatch({type: 'ADD'})
-countStore.dispatch({type: 'MINUS'})
+const onChange = () => {
+  number.innerText = countStore.getState()
+}
+countStore.subscribe(onChange)
 
-console.log(countStore.getState())
+// 4. dispatch(객체)를 만든다.
+const handleAdd = () => {
+  countStore.dispatch({type: 'ADD'})
+}
+const handleMinus = () => {
+  countStore.dispatch({type: 'MINUS'})
+}
+
+add.addEventListener('click', handleAdd)
+minus.addEventListener('click', handleMinus)
