@@ -40,6 +40,7 @@ const deleteToDo = id => {
   }
 }
 
+// 4. 디스페치 만들기
 const dispatchAddToDo = text => {
   store.dispatch(addToDo(text))
 }
@@ -49,20 +50,23 @@ const dispatchDeleteToDo = e => {
   store.dispatch(deleteToDo(id))
 }
 
+// 5. 이벤트 함수 만들기
 const paintToDos = () => {
   const toDos = store.getState()
 
-  ul.innerHTML = '' // ul을 빈 값으로 만든 다음에 li를 추가시킨다. (새로운 return 값을 등록해야 하기 때문에)
+  // ul을 빈 값으로 만든 다음에 li를 추가시킨다. (새로운 return 값을 등록해야 하기 때문에 기존에 등록된 내용을 비운다.)
+  ul.innerHTML = ''
 
   toDos.forEach(toDo => {
     const li = document.createElement('li')
     const btn = document.createElement('button')
 
     btn.innerText = 'DEL'
-    btn.addEventListener('click', dispatchDeleteToDo)
+    btn.addEventListener('click', dispatchDeleteToDo) // 디스패치 실행
 
     li.id = toDo.id
     li.innerText = toDo.text
+
     li.appendChild(btn)
     ul.appendChild(li)
   })
@@ -71,12 +75,12 @@ const paintToDos = () => {
 // paintToDos의 변화를 감지한다.
 store.subscribe(paintToDos)
 
-// 4. dispatch 사용해 리듀서 실행시키기
+// 5. 이벤트 함수 만들기
 const onSubmit = e => {
   e.preventDefault()
   const toDo = input.value
   input.value = ''
-  dispatchAddToDo(toDo)
+  dispatchAddToDo(toDo) // 디스패치 실행
 }
 
 form.addEventListener('submit', onSubmit)
