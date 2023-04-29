@@ -1,6 +1,7 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import './detail.scss'
 
 function Detail() {
   // ** Hooks
@@ -13,10 +14,12 @@ function Detail() {
 
   return (
     <>
-      <h1>Detail</h1>
+      <div class="detail">
+        <h1>Detail</h1>
 
-      <p>Created: {toDo.id}</p>
-      <p>{toDo.text}</p>
+        <p class="date">date: {toDo.id}</p>
+        <p>{toDo.text}</p>
+      </div>
     </>
   )
 }

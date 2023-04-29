@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { deleteToDo } from '../store/store'
-
+import './todo.scss'
 
 function ToDo(props) {
   // ** Hooks
@@ -16,7 +16,7 @@ function ToDo(props) {
   return (
     <li>
       <Link to={`/${props.id}`}>
-        { props.text } <button onClick={onDelete}>DEL</button>
+        <p>{ props.text }</p> <button onClick={onDelete}>DEL</button>
       </Link>
     </li>
   )

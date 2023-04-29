@@ -26,22 +26,24 @@ function Home() {
 
   return (
     <>
-      <h1>To Do</h1>
+      <div class="home">
+        <h1>To Do List</h1>
 
-      <form onSubmit={onSubmit}>
-        <input type="text" value={text} onChange={onChange}/>
-        <button>Add</button>
-      </form>
+        <form onSubmit={onSubmit}>
+          <input type="text" value={text} onChange={onChange} placeholder="What is your to do?"/>
+          <button>Add</button>
+        </form>
 
-      <ul>
-        {
-          toDos.map(toDo => {
-            return (
-              <ToDo id={toDo.id} text={toDo.text} key={toDo.id}/>
-            )
-          })
-        }
-      </ul>
+        <ul>
+          {
+            toDos.map(toDo => {
+              return (
+                <ToDo id={toDo.id} text={toDo.text} key={toDo.id}/>
+              )
+            })
+          }
+        </ul>
+      </div>
     </>
   )
 }
