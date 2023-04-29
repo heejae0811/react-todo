@@ -1,7 +1,8 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { deleteToDo } from '../store/store'
-import { Link } from 'react-router-dom'
+
 
 function ToDo(props) {
   // ** Hooks

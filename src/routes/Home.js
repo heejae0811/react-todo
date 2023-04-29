@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { addToDo } from '../store/store'
 import ToDo from '../components/ToDo'
+import './home.scss'
 
 function Home() {
   // ** Hooks
