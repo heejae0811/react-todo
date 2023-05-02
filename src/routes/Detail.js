@@ -14,10 +14,10 @@ function Detail() {
 
   return (
     <>
-      <div class="detail">
+      <div className="layout detail">
         <h1>Detail</h1>
 
-        <p class="date">date: {toDo.id}</p>
+        <p className="date">date: {toDo.id}</p>
         <p>{toDo.text}</p>
       </div>
     </>

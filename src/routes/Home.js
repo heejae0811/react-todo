@@ -26,7 +26,7 @@ function Home() {
 
   return (
     <>
-      <div class="home">
+      <div className="layout home">
         <h1>To Do List</h1>
 
         <form onSubmit={onSubmit}>
