@@ -1,13 +1,12 @@
-li {
-    display: flex;
-    justify-content: space-between;
-
-    a {
+ul {
+    li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         margin-bottom: 10px;
 
-        button {
-            padding: 0 10px;
-            background-color: #fff;
+        &:last-child {
+            margin-bottom: 0;
         }
     }
 }

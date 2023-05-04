@@ -12,7 +12,7 @@ function Home() {
   const [text, setText] = useState('')
 
   // ** Redux States
-  const toDos = useSelector(state => state)
+  const toDos = useSelector(state => state.todoList)
 
   function onChange(e) {
     setText(e.target.value)
@@ -36,9 +36,9 @@ function Home() {
 
         <ul>
           {
-            toDos.map(toDo => {
+            toDos.map((toDo, index) => {
               return (
-                <ToDo id={toDo.id} text={toDo.text} key={toDo.id}/>
+                <ToDo id={toDo.id} text={toDo.text} key={index}/>
               )
             })
           }

@@ -16,5 +16,11 @@ body {
         margin: 50px auto;
         padding: 30px;
         background-color: bisque;
+
+        button {
+            min-height: 30px;
+            padding: 0 10px;
+            background-color: #fff;
+        }
     }
 }

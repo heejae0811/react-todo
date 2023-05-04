@@ -1,22 +1,23 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit'
 
-// createSlice는 알아서 reducer를 준다.
-// state.push를 해서 mutate를 했지만 toolkit 알아서 새로운 state로 만들어준다.
-const reducer = createSlice({
+const toDoReducer = createSlice({
   name: 'toDosReducer',
-  initialState: [],
+
+  initialState: {
+    todoList: []
+  },
+
   reducers: {
     addToDo: (state, action) => {
-      state.unshift({ id: Date.now(), text: action.payload })
+      state.todoList.unshift({ id: Date.now(), text: action.payload })
     },
     deleteToDo: (state, action) => {
-      state.filter(toDo => toDo.id !== action.payload)
+      state.todoList = state.todoList.filter(list => list.id !== action.payload)
     }
   }
 })
 
-const store = configureStore({ reducer: reducer.reducer })
+const store = configureStore({ reducer: toDoReducer.reducer })
 
-export const { addToDo, deleteToDo } = reducer.actions
-
+export const { addToDo, deleteToDo } = toDoReducer.actions
 export default store
