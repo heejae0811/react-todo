@@ -1,23 +1,17 @@
-import { configureStore, createSlice } from '@reduxjs/toolkit'
+import { configureStore } from '@reduxjs/toolkit'
+import { persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
+import rootReducer from './rootReducer'
 
-const toDoReducer = createSlice({
-  name: 'toDosReducer',
+const persistConfig = {
+  key: 'root',
+  storage
+}
 
-  initialState: {
-    todoList: []
-  },
+const reducer = persistReducer(persistConfig, rootReducer)
 
-  reducers: {
-    addToDo: (state, action) => {
-      state.todoList.unshift({ id: Date.now(), text: action.payload })
-    },
-    deleteToDo: (state, action) => {
-      state.todoList = state.todoList.filter(list => list.id !== action.payload)
-    }
-  }
+const store = configureStore({
+  reducer
 })
 
-const store = configureStore({ reducer: toDoReducer.reducer })
-
-export const { addToDo, deleteToDo } = toDoReducer.actions
 export default store

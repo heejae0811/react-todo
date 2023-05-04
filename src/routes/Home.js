@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { addToDo } from '../store/store'
+import { addToDo } from '../store/toDoReducer'
 import ToDo from '../components/ToDo'
 import './home.scss'
 
@@ -12,7 +12,7 @@ function Home() {
   const [text, setText] = useState('')
 
   // ** Redux States
-  const toDos = useSelector(state => state.todoList)
+  const toDos = useSelector(state => state.toDos.toDoList)
 
   function onChange(e) {
     setText(e.target.value)

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import { deleteToDo } from '../store/store'
+import { deleteToDo } from '../store/toDoReducer'
 import './todo.scss'
 
 function ToDo(props) {
