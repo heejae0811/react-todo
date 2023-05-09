@@ -8,7 +8,7 @@ function Detail() {
   const param = useParams()
 
   // ** Redux States
-  const toDos = useSelector(state => state)
+  const toDos = useSelector(state => state.toDos.toDoList)
 
   const toDo = toDos.find(list => list.id === Number(param.id))
 
