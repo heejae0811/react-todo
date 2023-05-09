@@ -17,7 +17,7 @@ function Detail() {
       <div className="layout detail">
         <h1>Detail</h1>
 
-        <p className="date">date: {toDo.id}</p>
+        <p className="date">No.{toDo.id}</p>
         <p>{toDo.text}</p>
       </div>
     </>

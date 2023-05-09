@@ -31,7 +31,7 @@ function Home() {
 
         <form onSubmit={onSubmit}>
           <input type="text" value={text} onChange={onChange} placeholder="What is your to do?"/>
-          <button>Add</button>
+          <button>ADD</button>
         </form>
 
         <ul>
