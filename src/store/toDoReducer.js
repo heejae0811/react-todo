@@ -15,7 +15,7 @@ const todoSlice = createSlice({
       state.toDoList = state.toDoList.filter(list => list.id !== action.payload)
     },
     clearToDo: (state, action) => {
-      if(window.confirm('진짜로 삭제하시겠습니까?')) {
+      if(window.confirm('리스트를 모두 삭제하시겠습니까?')) {
         state.toDoList = []
       }
     }
