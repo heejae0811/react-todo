@@ -20,13 +20,17 @@ function Home() {
 
   function onSubmit(e) {
     e.preventDefault()
-    dispatch(addToDo(text))
-    setText('')
+    if(text === '') {
+      window.confirm('ToDo를 입력해 주세요.')
+    } else {
+      dispatch(addToDo(text))
+      setText('')
+    }
   }
 
   function onClear(e) {
     e.preventDefault()
-    dispatch(clearToDo)
+    dispatch(clearToDo())
   }
 
   return (
@@ -49,7 +53,14 @@ function Home() {
           }
         </ul>
 
-        <button onClick={onClear}>Clear all</button>
+        {
+          toDos.length > 0 &&
+          <button
+              className="btn-clear"
+              onClick={onClear}>
+            Clear all
+          </button>
+        }
       </div>
     </>
   )
