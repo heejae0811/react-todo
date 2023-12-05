@@ -13,9 +13,14 @@ const todoSlice = createSlice({
     },
     deleteToDo: (state, action) => {
       state.toDoList = state.toDoList.filter(list => list.id !== action.payload)
+    },
+    clearToDo: (state, action) => {
+      if(window.confirm('진짜로 삭제하시겠습니까?')) {
+        state.toDoList = []
+      }
     }
   }
 })
 
-export const { addToDo, deleteToDo } = todoSlice.actions
+export const { addToDo, deleteToDo, clearToDo } = todoSlice.actions
 export default todoSlice.reducer

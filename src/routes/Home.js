@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { addToDo } from '../store/toDoReducer'
+import { addToDo, clearToDo } from '../store/toDoReducer'
 import ToDo from '../components/ToDo'
 import './home.scss'
 
@@ -24,6 +24,11 @@ function Home() {
     setText('')
   }
 
+  function onClear(e) {
+    e.preventDefault()
+    dispatch(clearToDo)
+  }
+
   return (
     <>
       <div className="layout home">
@@ -43,6 +48,8 @@ function Home() {
             })
           }
         </ul>
+
+        <button onClick={onClear}>Clear all</button>
       </div>
     </>
   )
