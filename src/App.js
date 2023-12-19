@@ -1,18 +1,21 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Layout from './components/Layout/Layout'
 import Home from './routes/Home'
 import Detail from './routes/Detail'
-import './scss/common.scss'
+import './index.css'
 
 function App() {
-  return (
-    <BrowserRouter basename={process.env.PUBLIC_URL}>
-      <Routes>
-        <Route path="/" element={<Home/>}></Route>
-        <Route path="/:id" element={<Detail/>}></Route>
-      </Routes>
-    </BrowserRouter>
-  )
+	return (
+		<Layout>
+			<BrowserRouter basename={process.env.PUBLIC_URL}>
+				<Routes>
+					<Route path="/" element={<Home />}></Route>
+					<Route path="/:id" element={<Detail />}></Route>
+				</Routes>
+			</BrowserRouter>
+		</Layout>
+	)
 }
 
 export default App

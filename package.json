@@ -53,6 +53,8 @@
     "trailingComma": "none",
     "arrowParens": "always"
   },
-  "proxy": "http://localhost:3001",
+  "devDependencies": {
+    "tailwindcss": "^3.3.7"
+  },
   "homepage": "https://heejae0811.github.io/react-todo"
 }
