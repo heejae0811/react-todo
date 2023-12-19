@@ -1,7 +1,7 @@
 # 기능 구현  
+1. React @reduxjs/toolkit (To Do 가져오기, 추가하기, 삭제/전체 삭제하기)
+2. React redux-persist (로컬 스토리지 저장하기)
 3. React SCSS  
-4. React @reduxjs/toolkit  
-5. React redux-persist
 
 <br>
 
