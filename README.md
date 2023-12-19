@@ -3,6 +3,7 @@
 2. To Do 가져오기 (axios.get)
 3. To Do 추가하기 (axios.post)
 4. To Do 삭제/전체 삭제하기 (axios.delete)
+5. React Tailwind CSS
 
 <br>
  
