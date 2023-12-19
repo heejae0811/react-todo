@@ -1,69 +1,93 @@
-import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { addToDo, clearToDo } from '../store/toDoReducer'
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
 import ToDo from '../components/ToDo'
 import './home.scss'
 
 function Home() {
-  // ** Hooks
-  const dispatch = useDispatch()
+	// ** States
+	const [todo, setTodo] = useState('')
+	const [todoList, setTodoList] = useState([])
 
-  // ** States
-  const [text, setText] = useState('')
+	// ** todo 등록하기 POST
+	function onSubmit(e) {
+		e.preventDefault()
 
-  // ** Redux States
-  const toDos = useSelector(state => state.toDos.toDoList)
+		if (todo === '') {
+			alert('To Do를 입력해 주세요.')
+		} else {
+			axios
+				.post('http://localhost:3001/todo', {
+					todo: todo
+				})
+				.then(function (response) {
+					setTodo('')
+					console.log(response)
+				})
+				.catch(function (error) {
+					console.log(error)
+				})
+		}
+	}
 
-  function onChange(e) {
-    setText(e.target.value)
-  }
+	// ** todo 전체 삭제하기 DELETE
 
-  function onSubmit(e) {
-    e.preventDefault()
-    if(text === '') {
-      window.confirm('ToDo를 입력해 주세요.')
-    } else {
-      dispatch(addToDo(text))
-      setText('')
-    }
-  }
+	function onClear(e) {
+		e.preventDefault()
 
-  function onClear(e) {
-    e.preventDefault()
-    dispatch(clearToDo())
-  }
+		if (window.confirm('리스트를 전체 삭제하시겠습니까?')) {
+			axios
+				.delete('http://localhost:3001/todo')
+				.then(function (response) {
+					console.log(response)
+				})
+				.catch(function (error) {
+					console.log(error)
+				})
+		}
+	}
 
-  return (
-    <>
-      <div className="layout home">
-        <h1>To Do List</h1>
+	// ** todoList 변경될 때 마다 GET
+	useEffect(() => {
+		axios
+			.get('http://localhost:3001/todo')
+			.then((response) => {
+				setTodoList(response.data)
+				console.log(response)
+			})
+			.catch(function (error) {
+				console.log(error)
+			})
+	}, [todoList])
 
-        <form onSubmit={onSubmit}>
-          <input type="text" value={text} onChange={onChange} placeholder="What is your to do?"/>
-          <button>ADD</button>
-        </form>
+	return (
+		<>
+			<div className="layout home">
+				<h1>To Do List</h1>
 
-        <ul>
-          {
-            toDos.map((toDo, index) => {
-              return (
-                <ToDo id={toDo.id} text={toDo.text} key={index}/>
-              )
-            })
-          }
-        </ul>
+				<form onSubmit={onSubmit}>
+					<input
+						type="text"
+						value={todo}
+						onChange={(e) => setTodo(e.target.value)}
+						placeholder="What is your to do?"
+					/>
+					<button>ADD</button>
+				</form>
 
-        {
-          toDos.length > 0 &&
-          <button
-              className="btn-clear"
-              onClick={onClear}>
-            Clear all
-          </button>
-        }
-      </div>
-    </>
-  )
+				<ul>
+					{todoList.map((list, index) => {
+						return <ToDo id={list.id} todo={list.todo} key={index} />
+					})}
+				</ul>
+
+				{todoList.length > 0 && (
+					<button className="btn-clear" onClick={onClear}>
+						Clear all
+					</button>
+				)}
+			</div>
+		</>
+	)
 }
 
 export default Home

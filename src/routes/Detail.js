@@ -1,27 +1,37 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import axios from 'axios'
 import './detail.scss'
 
 function Detail() {
-  // ** Hooks
-  const param = useParams()
+	// ** States
+	const [detailTodo, setDetailTodo] = useState([])
 
-  // ** Redux States
-  const toDos = useSelector(state => state.toDos.toDoList)
+	// ** Hooks
+	const params = useParams().id
 
-  const toDo = toDos.find(list => list.id === Number(param.id))
+	useEffect(() => {
+		axios
+			.get(`http://localhost:3001/todo/${params}`)
+			.then(function (response) {
+				setDetailTodo(response.data)
+				console.log(response)
+			})
+			.catch(function (error) {
+				console.log(error)
+			})
+	}, [])
 
-  return (
-    <>
-      <div className="layout detail">
-        <h1>Detail</h1>
+	return (
+		<>
+			<div className="layout detail">
+				<h1>Detail</h1>
 
-        <p className="date">No.{toDo.id}</p>
-        <p>{toDo.text}</p>
-      </div>
-    </>
-  )
+				<p className="date">No.{detailTodo.id}</p>
+				<p>{detailTodo.todo}</p>
+			</div>
+		</>
+	)
 }
 
 export default Detail

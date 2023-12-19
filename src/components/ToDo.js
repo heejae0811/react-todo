@@ -1,26 +1,31 @@
 import React from 'react'
+import axios from 'axios'
 import { Link } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
-import { deleteToDo } from '../store/toDoReducer'
 import './todo.scss'
 
 function ToDo(props) {
-  // ** Hooks
-  const dispatch = useDispatch()
+	// ** todo 삭제하기 DELETE
+	function onDelete(e) {
+		e.preventDefault()
 
-  function onDelete(e) {
-    e.preventDefault()
-    dispatch(deleteToDo(props.id))
-  }
+		axios
+			.delete(`http://localhost:3001/todo/${props.id}`)
+			.then(function (response) {
+				console.log(response)
+			})
+			.catch(function (error) {
+				console.log(error)
+			})
+	}
 
-  return (
-    <li>
-      <Link to={`/${props.id}`}>
-        <p>{ props.text }</p>
-      </Link>
-      <button onClick={onDelete}>DEL</button>
-    </li>
-  )
+	return (
+		<li>
+			<Link to={`/${props.id}`}>
+				<p>{props.todo}</p>
+			</Link>
+			<button onClick={onDelete}>DEL</button>
+		</li>
+	)
 }
 
 export default ToDo
