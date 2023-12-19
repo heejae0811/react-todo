@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import axios from 'axios'
 
@@ -24,14 +24,10 @@ function Detail() {
 	return (
 		<>
 			<section>
-				<h1 className="mt-6 mb-12 md:mt-10 text-5xl font-bold text-center">
-					Detail
-				</h1>
+				<h1 className="mt-6 mb-12 md:mt-10 text-5xl font-bold text-center">Detail</h1>
 
 				<div className="p-4 md:p-6 md:pb-12 border border-slate-600 rounded">
-					<p className="block mb-6 text-xl font-bold text-right">
-						No.{detailTodo.id}
-					</p>
+					<p className="block mb-6 text-xl font-bold text-right">No.{detailTodo.id}</p>
 					<p className="flex gap-2 text-base md:text-lg">{detailTodo.todo}</p>
 				</div>
 

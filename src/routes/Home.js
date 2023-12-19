@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import axios from 'axios'
 import ToDo from '../components/ToDo'
 
@@ -61,9 +61,7 @@ function Home() {
 	return (
 		<>
 			<section>
-				<h1 className="mt-6 mb-12 md:mt-10 text-5xl font-bold text-center">
-					To Do List
-				</h1>
+				<h1 className="mt-6 mb-12 md:mt-10 text-5xl font-bold text-center">To Do List</h1>
 
 				<form className="mb-6" onSubmit={onSubmit}>
 					<label htmlFor="toDo" className="block mb-3 text-xl font-bold">
@@ -79,9 +77,7 @@ function Home() {
 							className="w-3/4 px-3 py-4 rounded outline-none"
 							placeholder="What is your to do?"
 						/>
-						<button className="w-1/4 bg-orange-400 hover:bg-orange-600 transition rounded">
-							ADD
-						</button>
+						<button className="w-1/4 bg-orange-400 hover:bg-orange-600 transition rounded">ADD</button>
 					</div>
 				</form>
 
