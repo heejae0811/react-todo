@@ -1,6 +1,6 @@
 # 기능 구현  
-1. React @reduxjs/toolkit (To Do 가져오기, 추가하기, 삭제/전체 삭제하기)
-2. React redux-persist (로컬 스토리지 저장하기)
+1. redux, @reduxjs/toolkit을 사용해 todo 상태 저장하기 (todo 가져오기, 추가하기, 삭제/전체 삭제하기)
+2. redux-persist를 사용해 데이터 로컬 스토리지 저장하기
 3. React SCSS  
 
 <br>
