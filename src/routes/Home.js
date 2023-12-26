@@ -6,6 +6,47 @@ function Home() {
 	// ** States
 	const [todo, setTodo] = useState('')
 	const [todoList, setTodoList] = useState([])
+	const [sortTodoList, setSortTodoList] = useState(todoList)
+	const [isActive, setActive] = useState(true)
+
+	// ** todoList 변경될 때 마다 GET
+	useEffect(() => {
+		axios
+			.get('http://localhost:3001/todo')
+			.then((response) => {
+				setTodoList(response.data)
+			})
+			.catch(function (error) {
+				console.log(error)
+			})
+	}, [todoList])
+
+	// 등록순, 최신순 정렬하기
+	useEffect(() => {
+		const sortedList = [...todoList].sort((a, b) => {
+			return isActive ? a.id - b.id : b.id - a.id
+		})
+
+		setSortTodoList(sortedList)
+	}, [todoList, isActive])
+
+	// 등록순 정렬하기
+	function registeredSort() {
+		if (isActive) {
+			setActive(isActive)
+		} else {
+			setActive(!isActive)
+		}
+	}
+
+	// 최신순 정렬하기
+	function latestSort() {
+		if (!isActive) {
+			setActive(isActive)
+		} else {
+			setActive(!isActive)
+		}
+	}
 
 	// ** todo 등록하기 POST
 	function onSubmit(e) {
@@ -20,7 +61,6 @@ function Home() {
 				})
 				.then(function (response) {
 					setTodo('')
-					console.log(response)
 				})
 				.catch(function (error) {
 					console.log(error)
@@ -29,7 +69,6 @@ function Home() {
 	}
 
 	// ** todo 전체 삭제하기 DELETE
-
 	function onClear(e) {
 		e.preventDefault()
 
@@ -44,19 +83,6 @@ function Home() {
 				})
 		}
 	}
-
-	// ** todoList 변경될 때 마다 GET
-	useEffect(() => {
-		axios
-			.get('http://localhost:3001/todo')
-			.then((response) => {
-				setTodoList(response.data)
-				console.log(response)
-			})
-			.catch(function (error) {
-				console.log(error)
-			})
-	}, [todoList])
 
 	return (
 		<>
@@ -81,19 +107,31 @@ function Home() {
 					</div>
 				</form>
 
-				<ul>
-					{todoList.map((list, index) => {
-						return <ToDo id={list.id} todo={list.todo} key={index} />
-					})}
-				</ul>
+				{sortTodoList.length > 0 && (
+					<>
+						<div className="flex gap-2 mb-6">
+							<button onClick={registeredSort} className={`${isActive ? 'underline underline-offset-4' : ''}`}>
+								등록순
+							</button>
+							<i>|</i>
+							<button onClick={latestSort} className={`${!isActive ? 'underline underline-offset-4' : ''}`}>
+								최신순
+							</button>
+						</div>
 
-				{todoList.length > 0 && (
-					<button
-						onClick={onClear}
-						class="block w-full md:w-1/3 m-auto mt-12 px-3 py-4 bg-orange-800 hover:bg-orange-600 transition rounded"
-					>
-						Clear all
-					</button>
+						<ul>
+							{sortTodoList.map((list, index) => {
+								return <ToDo id={list.id} todo={list.todo} index={index + 1} />
+							})}
+						</ul>
+
+						<button
+							onClick={onClear}
+							className="block w-full md:w-1/3 m-auto mt-12 px-3 py-4 bg-orange-800 hover:bg-orange-600 transition rounded"
+						>
+							Clear all
+						</button>
+					</>
 				)}
 			</section>
 		</>
