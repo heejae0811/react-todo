@@ -30,24 +30,6 @@ function Home() {
 		setSortTodoList(sortedList)
 	}, [todoList, isActive])
 
-	// 등록순 정렬하기
-	function registeredSort() {
-		if (isActive) {
-			setActive(isActive)
-		} else {
-			setActive(!isActive)
-		}
-	}
-
-	// 최신순 정렬하기
-	function latestSort() {
-		if (!isActive) {
-			setActive(isActive)
-		} else {
-			setActive(!isActive)
-		}
-	}
-
 	// ** todo 등록하기 POST
 	function onSubmit(e) {
 		e.preventDefault()
@@ -110,11 +92,11 @@ function Home() {
 				{sortTodoList.length > 0 && (
 					<>
 						<div className="flex gap-2 mb-6">
-							<button onClick={registeredSort} className={`${isActive ? 'underline underline-offset-4' : ''}`}>
+							<button onClick={() => setActive(true)} className={`${isActive ? 'underline underline-offset-4' : ''}`}>
 								등록순
 							</button>
 							<i>|</i>
-							<button onClick={latestSort} className={`${!isActive ? 'underline underline-offset-4' : ''}`}>
+							<button onClick={() => setActive(false)} className={`${!isActive ? 'underline underline-offset-4' : ''}`}>
 								최신순
 							</button>
 						</div>
